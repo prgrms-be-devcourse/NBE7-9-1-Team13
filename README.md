@@ -58,8 +58,8 @@ Spring Boot 기반의 **Grids & Circles** 온라인 주문·배송 시스템으�
 ---
 
 ## **🔗 ERD (Entity Relationship Diagram)**
+<img width="1140" height="511" alt="Image" src="https://github.com/user-attachments/assets/048448b8-4b01-4ae8-b8b1-4e60612c2bce" />
 
-<img width="1140" height="672" alt="Image" src="https://github.com/user-attachments/assets/ff8f283f-5b2c-4c88-adda-39ef7e33681f" />
 ---
 
 ## 📃코딩 컨벤션
