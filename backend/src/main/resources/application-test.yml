@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:db_dev;MODE=MySQL
+
+
+
+#테스트 환경 전용 DB(H2 메모리 기반)
+#실행할 때마다 새로 생성되고, 종료하면 데이터가 사라짐
+#주로 JUnit 통합 테스트 환경에서 사용
+#MODE=MySQL → MySQL 호환 모드
+#보통 JUnit 테스트에서 @ActiveProfiles("test") 로 이 설정을 활성화함
