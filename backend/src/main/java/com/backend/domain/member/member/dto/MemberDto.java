@@ -1,4 +1,17 @@
 package com.backend.domain.member.member.dto;
 
-public class MemberDto {
+import com.backend.domain.member.member.entity.Member;
+
+public record MemberDto(
+    Long id,
+    String email,
+    String password
+){
+    public MemberDto(Member member){
+        this(
+            member.getId(),
+            member.getEmail(),
+            member.getPassword()
+        );
+    }
 }

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
@@ -10,12 +11,20 @@
         <module name="backend.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cafe" target="21" />
+      <module name="cafe.main" target="21" />
+      <module name="cafe.test" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="backend" options="-parameters" />
       <module name="backend.main" options="-parameters" />
       <module name="backend.test" options="-parameters" />
+      <module name="cafe" options="-parameters" />
+      <module name="cafe.main" options="-parameters" />
+      <module name="cafe.test" options="-parameters" />
     </option>
   </component>
 </project>
