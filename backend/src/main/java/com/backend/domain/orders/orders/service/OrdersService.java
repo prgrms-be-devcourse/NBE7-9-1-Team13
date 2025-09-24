@@ -1,11 +1,11 @@
 package com.backend.domain.orders.orders.service;
 
+import com.backend.domain.item.item.entity.Item;
+import com.backend.domain.item.item.service.ItemService;
 import com.backend.domain.orderitem.orderitem.entity.OrderItem;
-import com.backend.domain.orders.orders.controller.OrdersController;
 import com.backend.domain.orders.orders.dto.OrdersDto;
 import com.backend.domain.orders.orders.entity.Orders;
 import com.backend.domain.orders.orders.repository.OrdersRepository;
-import com.backend.domain.product.product.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +22,7 @@ import java.util.Optional;
 public class OrdersService {
 
     private final OrdersRepository ordersRepository;
+    private final ItemService itemService;
 
     public LocalDateTime calculateDeliveryDate(LocalDateTime now) {
         LocalTime cutoffTime = LocalTime.of(14, 0); // 오후 2시
@@ -55,7 +56,7 @@ public class OrdersService {
 
         for (OrdersDto.OrdersItemModifyReqBody newItem : orderItems) {
 
-            Item item = itemRepository.findById(newItem.itemId())
+            Item item = itemService.findById(newItem.itemId())
                     .orElseThrow(() -> new RuntimeException("상품 없음"));
 
             OrderItem orderItem = new OrderItem();
@@ -63,7 +64,8 @@ public class OrdersService {
             orderItem.setQuantity(newItem.quantity());
 
             // 연관관계 편의 메서드 사용
-            orders.addOrderItem(orderItem);
+//            orders.addOrderItem(orderItem);
+//        }
         }
     }
 }

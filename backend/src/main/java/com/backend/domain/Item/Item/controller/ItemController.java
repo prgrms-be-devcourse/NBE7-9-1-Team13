@@ -1,4 +1,4 @@
-package com.backend.domain.Item.Item.controller;
+package com.backend.domain.item.item.controller;
 
 public class ItemController {
 

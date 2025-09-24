@@ -1,4 +1,4 @@
-package com.backend.domain.Item.Item.dto;
+package com.backend.domain.item.item.dto;
 
 public class ItenUpdateRequest
 {

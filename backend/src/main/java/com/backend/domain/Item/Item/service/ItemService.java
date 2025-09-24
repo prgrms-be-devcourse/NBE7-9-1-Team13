@@ -1,12 +1,13 @@
-package com.backend.domain.Item.Item.service;
+package com.backend.domain.item.item.service;
 
 
-import com.backend.domain.Item.Item.entity.Item;
-import com.backend.domain.Item.Item.repository.ItemRepository;
+import com.backend.domain.item.item.entity.Item;
+import com.backend.domain.item.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +29,9 @@ public class ItemService {
             throw new NoSuchElementException("아이템을 찾을 수 없습니다. id="+id);
         }
         itemRepository.deleteById(id);
+    }
+
+    public Optional<Item> findById(Long id){
+        return itemRepository.findById(id);
     }
 }
