@@ -1,0 +1,8 @@
+2025-09-24 11:25:59.281654+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table [*]order (\000d\000a        id bigint not null,\000d\000a        address varchar(255),\000d\000a        primary key (id)\000d\000a    )"; expected "identifier"; SQL statement:
+
+    create table order (
+        id bigint not null,
+        address varchar(255),
+        primary key (id)
+    ) [42001-232]
