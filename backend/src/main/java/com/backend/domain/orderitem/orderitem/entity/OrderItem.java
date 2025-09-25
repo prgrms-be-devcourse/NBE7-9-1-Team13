@@ -3,13 +3,16 @@ package com.backend.domain.orderitem.orderitem.entity;
 import com.backend.domain.item.item.entity.Item;
 import com.backend.domain.orders.orders.entity.Orders;
 import com.backend.global.jpa.entity.BaseEntity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter
 @Setter
 public class OrderItem extends BaseEntity {
 
