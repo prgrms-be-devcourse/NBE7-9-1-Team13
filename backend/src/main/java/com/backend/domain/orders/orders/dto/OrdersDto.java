@@ -35,5 +35,13 @@ public class OrdersDto {
             String address,
             List<OrdersItemModifyReqBody> ordersItems
     ) {}
-
+    public record OrdersDetailResponse(
+            Long orderId,
+            String email,
+            String address,
+            String status,
+            java.time.LocalDateTime orderDate,
+            java.time.LocalDateTime deliveryDate,
+            List<OrderItemResponse> orderItems
+    ) {}
 }
