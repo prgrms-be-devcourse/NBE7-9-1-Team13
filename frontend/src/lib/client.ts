@@ -1,4 +1,5 @@
 //스프링부트의 global 파일과 비슷
+
 export function fetchApi(url: string, options?: RequestInit) {
     if (options?.body) {
       const headers = new Headers(options.headers || {});
