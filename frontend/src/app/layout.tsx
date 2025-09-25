@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/navbar";
+import localFont from "next/font/local";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +13,15 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+// Pretendard 등록
+const pretendard = localFont({
+  src: "../../public/fonts/PretendardVariable.woff2",
+  variable: "--font-pretendard",
+  weight: "100 900", // Variable Font 범위
+  display: "swap",
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,10 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    // <html lang="ko">
+
+    //   <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="ko" className={`${pretendard.variable}`}>
+      <body className={`antialiased`}>
+        <Navbar/>
         {children}
       </body>
     </html>
