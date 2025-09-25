@@ -9,10 +9,7 @@ import com.backend.domain.member.member.service.MemberService;
 import com.backend.global.rsData.RsData;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +29,14 @@ public class MemberController {
                 "200-1",
                 "로그인에 성공하셨습니다",
                 new LoginResponse(member)
+        );
+    }
+
+    @DeleteMapping("/logout")
+    public RsData<Void> logout(){
+        return new RsData<>(
+                "200-1",
+                "로그아웃 되었습니다."
         );
 
     }

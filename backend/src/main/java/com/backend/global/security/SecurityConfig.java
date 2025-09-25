@@ -22,9 +22,9 @@ public class SecurityConfig {
                         .requestMatchers("/favicon.ico").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/**").permitAll()
-                        .anyRequest().authenticated()) //위에꺼 제외하고는 인증해야지만 들어갈 수 있다
+                        .anyRequest().authenticated()) //위의 과정 제외하고는 인증해야지만 들어갈 수 있다
 
-                .csrf((csrf) -> csrf.disable())
+                .csrf((csrf) -> csrf.disable()) //csrf 비활성화
 
                 .headers((headers) -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
