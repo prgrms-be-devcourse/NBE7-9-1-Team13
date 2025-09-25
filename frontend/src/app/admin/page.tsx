@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { fetchApi } from "@/lib/client";
 
-//관리자 로그인 페이지 - 진행중
+//관리자 로그인 페이지
 export default function AdminLoginPage() {
   const router = useRouter();
 

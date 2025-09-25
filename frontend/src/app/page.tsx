@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 //메인 주문 페이지
 //임시로 데이터를 넣어두고 진행한다
-//결제하기 처리는 아직 안했음
 
 export default function Home() {
   const items: Item[] = [
