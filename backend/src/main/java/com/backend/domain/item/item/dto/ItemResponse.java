@@ -11,7 +11,7 @@ public class ItemResponse {
     private String name;
     private String content;
     private int price;
-    private int stock;
+    private String imageUrl;
     private String createdAt;
     private String updatedAt;
 
@@ -21,7 +21,7 @@ public class ItemResponse {
                 item.getName(),
                 item.getContent(),
                 item.getPrice(),
-                item.getStock(),
+                item.getImageUrl(),
                 item.getCreatedAt() != null ? item.getCreatedAt().toString() : null,
                 item.getUpdatedAt() != null ? item.getUpdatedAt().toString() : null
         );

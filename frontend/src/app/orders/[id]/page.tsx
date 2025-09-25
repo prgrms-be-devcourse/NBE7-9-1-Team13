@@ -2,8 +2,10 @@
 
 import { Order } from "@/type/order";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { fetchApi } from "@/lib/client";
+
 
 //주문 상세보기 페이지(단건 조회)
 //수정 -> 백엔드와 연동해서 잘 수정되는지 확인 필요. 아직 정상 작동x
@@ -11,6 +13,8 @@ import { useState } from "react";
 //-> 페이지마다 데이터 임시로 지정해두고 작업해서 생기는 현상. 백엔드 연동 후 잘 작동하는지 확인 필수
 export default function OrderDetailPage() {
     const params = useParams();
+    const router = useRouter();
+
     const id = Number(params.id);
   
     // 임시 데이터 (추후 서버 연동 예정)
@@ -74,12 +78,13 @@ export default function OrderDetailPage() {
     // 주문 취소 핸들러
     const handleCancel = (id: number) => {
       if (confirm("정말 주문을 취소하시겠습니까?")) {
-        setOrders((prev) =>
-          prev.map((o) =>
-            o.id === id ? { ...o, status: "CANCELLED" } : o
-          )
-        );
-      }
+        fetchApi(`/api/orders/${id}`, {
+          method: "PATCH",
+        }).then((data) => {
+          alert(data.msg);
+          router.replace(`/orders`);
+      });
+    }
     };
   
     return (

@@ -4,6 +4,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Order } from "@/type/order";
 import Link from "next/link";
+import { fetchApi } from "@/lib/client";
+
 
 //주문 수정 페이지
 //주소만 수정할 수 있도록 함
@@ -83,14 +85,21 @@ export default function OrderEditPage() {
       );
     }
   
-    const handleSave = (e: React.FormEvent) => {
+    const handleSave = (e: any) => {
       e.preventDefault();
-  
-      const updatedOrder: Order = { ...order, address };
-      console.log("수정된 주문:", updatedOrder);
-  
-      alert("주소가 수정되었습니다!");
-      router.replace(`/orders/${order.id}`);
+
+      const form = e.target;
+      const addressInput = form.address;
+    
+      fetchApi(`/api/v1/orders/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          address: addressInput.value
+        }),
+      }).then((data) => {
+        alert(data.msg);
+        router.replace(`/orders/${id}`);
+      });
     };
   
     return (
@@ -125,9 +134,9 @@ export default function OrderEditPage() {
             {/* 주소 수정 */}
             <label className="block mt-6 mb-2 text-lg font-bold">주소</label>
             <textarea
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              name="address"
               className="w-full border border-gray-300 rounded p-2 mb-4"
+              defaultValue={order.address}
               required
             />
   

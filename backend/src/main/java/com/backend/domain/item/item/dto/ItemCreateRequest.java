@@ -5,8 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ItemUpdateRequest {
+public class ItemCreateRequest {
     private String name;
     private String content;
     private int price;
+    private String imageUrl;
 }

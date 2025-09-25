@@ -12,7 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry){
-        registry.addMapping("api/**")
+        registry.addMapping("/api/**")
                 .allowedOrigins("https://cdpn.io", "http://localhost:3000") //허용할 출처
                 .allowedMethods("GET", "POST", "PUT", "DELETE","PATCH","OPTIONS") //허용할 메소드
                 .allowedHeaders("*")

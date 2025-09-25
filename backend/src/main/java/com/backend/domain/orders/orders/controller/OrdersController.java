@@ -1,6 +1,7 @@
 package com.backend.domain.orders.orders.controller;
 
 import com.backend.domain.orders.orders.dto.OrdersDto;
+import com.backend.domain.orders.orders.dto.OrdersModifyReqDto;
 import com.backend.domain.orders.orders.entity.Orders;
 import com.backend.domain.orders.orders.service.OrdersService;
 import com.backend.global.rsData.RsData;
@@ -86,7 +87,7 @@ public class OrdersController {
                 response
         );
     }
-
+/*
     @DeleteMapping("/{id}")
     @Operation(summary = "주문 삭제")
     public RsData<Void> deleteOrders(
@@ -100,16 +101,17 @@ public class OrdersController {
                 "%d번 주문이 삭제되었습니다.".formatted(id)
         );
     }
+*/
 
     @PutMapping("/{id}")
     @Operation(summary = "주문 수정")
     @Transactional
     public RsData<Void> modifyOrders(
             @PathVariable Long id,
-            @RequestBody OrdersDto.OrdersModifyReqBody reqBody
-    ) {
+            @RequestBody OrdersModifyReqDto request
+            ) {
         Orders orders = ordersService.findById(id).get();
-        ordersService.modifyOrders(orders, reqBody.address(), reqBody.ordersItems());
+        ordersService.modifyOrders(orders, request.address());
 
         return new RsData(
                 "200-1",
@@ -117,5 +119,19 @@ public class OrdersController {
         );
     }
 
+    @PatchMapping("/{id}")
+    @Operation(summary = "주문 취소")
+    @Transactional
+    public RsData<Void> cancelOrders(
+            @PathVariable Long id
+    ) {
+        Orders orders = ordersService.findById(id).get();
+        orders.setStatus(Orders.Status.CANCELLED);
+
+        return new RsData(
+                "200-1",
+                "%d번 주문이 취소되었습니다.".formatted(id)
+        );
+    }
 
 }
