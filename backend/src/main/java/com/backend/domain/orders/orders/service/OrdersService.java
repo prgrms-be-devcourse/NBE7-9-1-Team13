@@ -1,15 +1,5 @@
 package com.backend.domain.orders.orders.service;
 
-import com.backend.domain.item.item.entity.Item;
-import com.backend.domain.item.item.service.ItemService;
-import com.backend.domain.orderitem.orderitem.entity.OrderItem;
-import com.backend.domain.orders.orders.dto.OrdersDto;
-import com.backend.domain.orders.orders.entity.Orders;
-import com.backend.domain.orders.orders.repository.OrdersRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,18 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.backend.domain.item.item.entity.Item;
+import com.backend.domain.item.item.service.ItemService;
+import com.backend.domain.member.member.entity.Member;
+import com.backend.domain.member.member.repository.MemberRepository;
+import com.backend.domain.orderitem.orderitem.entity.OrderItem;
+import com.backend.domain.orders.orders.dto.OrdersDto;
+import com.backend.domain.orders.orders.entity.Orders;
+import com.backend.domain.orders.orders.repository.OrdersRepository;
+
+import lombok.RequiredArgsConstructor;
+
 
 @Service
 @RequiredArgsConstructor
 public class OrdersService {
 
     private final OrdersRepository ordersRepository;
+    private final MemberRepository memberRepository;
     private final ItemService itemService;
 
     @Transactional
     public LocalDateTime createOrders(OrdersDto.OrdersCreateReqBody request) {
         Orders orders = new Orders();
         orders.setAddress(request.address());
+        Member member = memberRepository.findByEmail(request.email())
+            .orElse(null);
+        orders.setMember(member);
 
         List<OrderItem> orderItems = new ArrayList<>();
         for (OrdersDto.OrdersItemCreateReqBody newItem : request.orderItems()) {
@@ -44,6 +52,7 @@ public class OrdersService {
         }
 
         orders.setOrderItems(orderItems);
+        System.out.println("member=" + member + ", orderItems=" + orderItems.size());
 
         ordersRepository.save(orders);
 
