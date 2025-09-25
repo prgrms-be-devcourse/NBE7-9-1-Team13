@@ -86,6 +86,7 @@ export default function Home() {
   // 결제하기 처리
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("주문 버튼 클릭됨"); // 여기
 
     if (Object.keys(cart).length === 0) {
       alert("장바구니가 비어있습니다.");
@@ -101,6 +102,24 @@ export default function Home() {
     }
 
     // 여기서 주문 데이터 저장 로직 추가 예정 (백엔드 API 연결. fetch)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/orders`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        address,
+        orderItems: Object.entries(cart).map(([id, quantity]) => ({
+          productId: Number(id),
+          quantity
+        }))
+      })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => console.log(data))
+    .catch(err => console.error("주문 전송 실패:", err));
     alert("결제가 완료되었습니다!");
 
     // 주문 내역 페이지로 이동 (email 포함) -> 연동 후 다시 테스트 예정. 일단 보류류

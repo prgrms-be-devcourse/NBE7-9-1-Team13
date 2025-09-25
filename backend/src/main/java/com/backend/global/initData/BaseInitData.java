@@ -1,16 +1,18 @@
 package com.backend.global.initData;
 
-import com.backend.domain.item.item.entity.Item;
-import com.backend.domain.item.item.repository.ItemRepository;
-import com.backend.domain.member.member.role.Role;
-import com.backend.domain.member.member.service.MemberService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.backend.domain.item.item.entity.Item;
+import com.backend.domain.item.item.repository.ItemRepository;
+import com.backend.domain.member.member.role.Role;
+import com.backend.domain.member.member.service.MemberService;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
