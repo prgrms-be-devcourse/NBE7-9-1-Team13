@@ -14,12 +14,18 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=100)
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private int price;
+
     private int stock;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
