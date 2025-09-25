@@ -1,5 +1,6 @@
 package com.backend.domain.item.item.controller;
 
+import com.backend.domain.item.item.dto.ItemCreateRequest;
 import com.backend.domain.item.item.dto.ItemResponse;
 import com.backend.domain.item.item.dto.ItemUpdateRequest;
 import com.backend.domain.item.item.entity.Item;
@@ -7,6 +8,7 @@ import com.backend.domain.item.item.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +24,15 @@ public class ItemController {
     // 상품 생성
     @PostMapping
     @Operation(summary = "상품 생성")
-    public ResponseEntity<Item> createItem(@RequestBody Item item) {
-        Item created = itemService.createItem(item);
-        return ResponseEntity.ok(created);
+    public ResponseEntity<ItemResponse> createItem(@RequestBody ItemCreateRequest request) {
+        ItemResponse created = itemService.createItem(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
     // 전체 상품 조회
     @GetMapping
     @Operation(summary = "전체 상품 조회")
-    public ResponseEntity<List<Item>> getAllItems() {
-        List<Item> items = itemService.getAllItems();
+    public ResponseEntity<List<ItemResponse>> getAllItems() {
+        List<ItemResponse> items = itemService.getAllItems();
         return ResponseEntity.ok(items);
     }
 
@@ -44,8 +46,7 @@ public class ItemController {
                 id,
                 request.getName(),
                 request.getContent(),
-                request.getPrice(),
-                request.getStock()
+                request.getPrice()
         );
         return ResponseEntity.ok(ItemResponse.fromEntity(updated));
     }

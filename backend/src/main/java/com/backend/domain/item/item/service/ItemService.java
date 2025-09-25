@@ -1,6 +1,8 @@
 package com.backend.domain.item.item.service;
 
 
+import com.backend.domain.item.item.dto.ItemCreateRequest;
+import com.backend.domain.item.item.dto.ItemResponse;
 import com.backend.domain.item.item.entity.Item;
 import com.backend.domain.item.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,20 +17,31 @@ import java.util.Optional;
 public class ItemService {
     private final ItemRepository itemRepository;
 
-    public Item createItem(Item item) {
-        return itemRepository.save(item);
-    }
-    public List<Item> getAllItems() {
-        return itemRepository.findAll();
+    // 상품 생성 (Create)
+    public ItemResponse createItem(ItemCreateRequest request) {
+        Item item = new Item(
+                request.getName(),
+                request.getContent(),
+                request.getPrice(),
+                request.getImageUrl()
+        );
+
+        Item savedItem = itemRepository.save(item);
+        return ItemResponse.fromEntity(savedItem);
     }
 
-    public Item updateItem(Long id, String name, String content, int price, int stock){
+    public List<ItemResponse> getAllItems() {
+        return itemRepository.findAll()
+                .stream()
+                .map(ItemResponse::fromEntity)
+                .toList();
+    }
+    public Item updateItem(Long id, String name, String content, int price){
         Item item=this.itemRepository.findById(id)
                         .orElseThrow(() -> new NoSuchElementException("아이템을 찾을 수 없습니다. id="+ id));
         item.setName(name);
         item.setContent(content);
         item.setPrice(price);
-        item.setStock(stock);
         return itemRepository.save(item);
     }
 

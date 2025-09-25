@@ -1,0 +1,21 @@
+# IntelliJ
+.idea/
+*.iml
+
+# H2 DB
+*.mv.db
+
+# Node
+node_modules/
+package-lock.json
+
+# IntelliJ
+.idea/
+*.iml
+
+# H2 DB
+*.mv.db
+
+# Node.js
+node_modules/
+package-lock.json
