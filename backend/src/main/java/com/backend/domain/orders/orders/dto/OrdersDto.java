@@ -25,16 +25,6 @@ public class OrdersDto {
         int quantity
     ) {}
 
-
-    public record OrdersItemModifyReqBody(
-            Long itemId,
-            int quantity
-    ) {}
-
-    public record OrdersModifyReqBody(
-            String address,
-            List<OrdersItemModifyReqBody> ordersItems
-    ) {}
     public record OrdersDetailResponse(
             Long orderId,
             String email,

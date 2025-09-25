@@ -1,23 +1,21 @@
 package com.backend.domain.orders.orders.service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.backend.domain.item.item.entity.Item;
 import com.backend.domain.item.item.service.ItemService;
 import com.backend.domain.orderitem.orderitem.entity.OrderItem;
 import com.backend.domain.orders.orders.dto.OrdersDto;
 import com.backend.domain.orders.orders.entity.Orders;
 import com.backend.domain.orders.orders.repository.OrdersRepository;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -58,25 +56,10 @@ public class OrdersService {
     }
 
     @Transactional
-    public void modifyOrders(Orders orders, String address, List<OrdersDto.OrdersItemModifyReqBody> orderItems) {
+    public void modifyOrders(Orders orders, String address) {
 
         orders.setAddress(address);
 
-        orders.getOrderItems().clear();
-
-        for (OrdersDto.OrdersItemModifyReqBody newItem : orderItems) {
-
-            Item item = itemService.findById(newItem.itemId())
-                    .orElseThrow(() -> new RuntimeException("상품 없음"));
-
-            OrderItem orderItem = new OrderItem();
-            orderItem.setItem(item);
-            orderItem.setQuantity(newItem.quantity());
-
-            // 연관관계 편의 메서드 사용
-            orders.addOrderItem(orderItem);
-//        }
-        }
     }
 
     @Transactional
