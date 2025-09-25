@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("api/v1/orders")
@@ -59,6 +60,32 @@ public class OrdersController {
             response
         );
     }
+    @GetMapping("/{id}")
+    public RsData<OrdersDto.OrdersDetailResponse> readOrder(@PathVariable Long id) {
+        Orders order = ordersService.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
+
+        OrdersDto.OrdersDetailResponse response = new OrdersDto.OrdersDetailResponse(
+                order.getId(),
+                order.getMember().getEmail(),
+                order.getAddress(),
+                order.getStatus().name(),
+                order.getCreateDate(),
+                order.getDeliveryDate(),
+                order.getOrderItems().stream()
+                        .map(oi -> new OrdersDto.OrderItemResponse(
+                                oi.getItem().getId(),
+                                oi.getQuantity()
+                        ))
+                        .toList()
+        );
+
+        return new RsData<>(
+                "200-1",
+                "%d번 주문 단건 조회".formatted(id),
+                response
+        );
+    }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "주문 삭제")
@@ -89,4 +116,6 @@ public class OrdersController {
                 "%d번 주문이 수정되었습니다.".formatted(id)
         );
     }
+
+
 }
