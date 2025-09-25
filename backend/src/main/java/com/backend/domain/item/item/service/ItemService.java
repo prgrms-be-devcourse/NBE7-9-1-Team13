@@ -6,6 +6,7 @@ import com.backend.domain.item.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -13,6 +14,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
+
+    public Item createItem(Item item) {
+        return itemRepository.save(item);
+    }
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
 
     public Item updateItem(Long id, String name, String content, int price, int stock){
         Item item=this.itemRepository.findById(id)
