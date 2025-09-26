@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Order } from "@/type/order";
+import { OrderDto } from "@/type/orderDto";
 import { useSearchParams } from "next/navigation";
 
 //주문 내역 페이지(다건 조회)
@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function OrdersPage() {
   // 변수 정의
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<OrderDto[]>([]);
   const searchParams = useSearchParams();
   const initialEmail = searchParams.get("email") || "";
   const [email, setEmail] = useState(initialEmail);
@@ -114,7 +114,7 @@ export default function OrdersPage() {
                     상태: {order.status}
                   </p>
                   <p className="font-bold">
-                    총 금액: {order.total.toLocaleString()}원
+                    총 금액: {order.orderTotalPrice.toLocaleString()}원
                   </p>
                 </Link>
               </div>

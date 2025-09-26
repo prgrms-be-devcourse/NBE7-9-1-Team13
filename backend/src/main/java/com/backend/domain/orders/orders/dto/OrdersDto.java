@@ -17,26 +17,21 @@ public class OrdersDto {
 
     public record OrdersResponse(
         Long orderId,
+        String email,
         String address,
         String status,
         LocalDateTime orderDate,
         LocalDateTime deliveryDate,
         List<OrderItemResponse> orderItems,
-        int total
+        int orderTotalPrice
     ) {}
 
     public record OrderItemResponse(
-        Long itemId,
-        int quantity
+            Long itemId,
+            String name,
+            int quantity,
+            int price,
+            int itemTotalPrice
     ) {}
 
-    public record OrdersDetailResponse(
-            Long orderId,
-            String email,
-            String address,
-            String status,
-            java.time.LocalDateTime orderDate,
-            java.time.LocalDateTime deliveryDate,
-            List<OrderItemResponse> orderItems
-    ) {}
 }

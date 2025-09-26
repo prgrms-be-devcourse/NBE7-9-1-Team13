@@ -5,9 +5,12 @@ import Image from "next/image";
 import { Item } from "@/type/item";
 import { useRouter } from "next/navigation";
 
+
+
 // 메인 주문 페이지
 export default function Home() {
     const [items, setItems] = useState<Item[]>([]);
+    const router = useRouter();
 
 
     // 상품 조회
@@ -101,7 +104,7 @@ export default function Home() {
         alert("결제가 완료되었습니다!");
 
         // 주문 내역 페이지로 이동 (email 포함) -> 연동 후 다시 테스트 예정. 일단 보류류
-        //router.replace(`/orders?email=${encodeURIComponent(email)}`);
+        router.replace(`/orders?email=${encodeURIComponent(email)}`);
     };
 
 
