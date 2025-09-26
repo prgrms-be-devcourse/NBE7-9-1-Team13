@@ -22,8 +22,7 @@ public class AdminOrderController {
 
     @GetMapping
     @Operation(summary = "관리자 주문 다건 조회")
-    public RsData<List<OrdersDto.OrdersResponse>> readOrders(
-            @RequestParam String email) {
+    public RsData<List<OrdersDto.OrdersResponse>> readOrders() {
         List<Orders> ordersList = ordersService.findAll();
 
         // Orders → DTO 변환
@@ -31,12 +30,18 @@ public class AdminOrderController {
                 .map(order -> new OrdersDto.OrdersResponse(
                         order.getId(),
                         order.getAddress(),
+                        order.getStatus().name(),
+                        order.getCreateDate(),
+                        order.getDeliveryDate(),// 여기서 orderDate에 매핑
                         order.getOrderItems().stream()
                                 .map(item -> new OrdersDto.OrderItemResponse(
                                         item.getItem().getId(),
                                         item.getQuantity()
                                 ))
-                                .toList()
+                                .toList(),
+                        order.getOrderItems().stream()
+                                .mapToInt(oi -> oi.getItem().getPrice() * oi.getQuantity())
+                                .sum() // total 계산
                 ))
                 .toList();
 
@@ -54,7 +59,7 @@ public class AdminOrderController {
 
         OrdersDto.OrdersDetailResponse response = new OrdersDto.OrdersDetailResponse(
                 order.getId(),
-                order.getMember().getEmail(),
+                order.getEmail(),
                 order.getAddress(),
                 order.getStatus().name(),
                 order.getCreateDate(),
