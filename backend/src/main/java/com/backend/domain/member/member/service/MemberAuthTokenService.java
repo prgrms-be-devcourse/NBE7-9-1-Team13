@@ -21,9 +21,8 @@ public class MemberAuthTokenService {
     private long expireSeconds;
 
 
-    //외부 패키지에서 접근하지 못하도록 접근제어자 default로 변경
     //토큰 생성
-    String generateToken(Member member) {
+    public String generateToken(Member member) {
         return JwtUtil.createToken(
                 secretPattern,
                 expireSeconds,
@@ -35,7 +34,7 @@ public class MemberAuthTokenService {
         );
     }
 
-    Claims parseToken(String token) {
+    public Claims parseToken(String token) {
         return JwtUtil.parseToken(secretPattern, token);
     }
 

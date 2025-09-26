@@ -16,19 +16,21 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/admin")
-@Tag(name="Member", description = "멤버 컨트롤러")
+@Tag(name="Member", description = "관리자 멤버 컨트롤러")
 public class MemberController {
 
     private final MemberService memberService;
 
 
     @PostMapping("/login")
-    @Operation(summary = "로그인")
+    @Operation(summary = "관리자 로그인")
     public RsData<MemberDto> login(
             @RequestBody @Valid LoginRequest loginRequest
     ){
 
+        //이메일 + 비밀번호로 검증
         Member member = memberService.login(loginRequest.email(), loginRequest.password());
+        //토큰 발급
         String accessToken = memberService.generateToken(member);
 
         return new RsData(
@@ -39,7 +41,7 @@ public class MemberController {
     }
 
     @DeleteMapping("/logout")
-    @Operation(summary = "로그아웃")
+    @Operation(summary = "관리자 로그아웃")
     public RsData<Void> logout(){
         return new RsData<>(
                 "200-1",
