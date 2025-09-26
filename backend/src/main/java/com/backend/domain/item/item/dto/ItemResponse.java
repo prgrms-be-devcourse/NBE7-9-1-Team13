@@ -22,8 +22,9 @@ public class ItemResponse {
                 item.getContent(),
                 item.getPrice(),
                 item.getImageUrl(),
-                item.getCreatedAt() != null ? item.getCreatedAt().toString() : null,
-                item.getUpdatedAt() != null ? item.getUpdatedAt().toString() : null
+                item.getCreateDate() != null ? item.getCreateDate().toString() : null,
+                item.getModifyDate() != null ? item.getModifyDate().toString() : null
         );
     }
+
 }

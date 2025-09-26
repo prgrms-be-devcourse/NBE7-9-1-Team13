@@ -41,10 +41,10 @@ public class BaseInitData {
 
         // 상품 초기화 (기본 원두 4개)
         if (itemRepository.count() == 0) {
-            itemRepository.save(new Item("콜롬비아 수프리모", "밸런스가 좋은 커피 원두", 12000, "/images/colombia.png"));
-            itemRepository.save(new Item("에티오피아 예가체프", "꽃향과 산미가 특징인 원두", 14000, "/images/ethiopia.png"));
-            itemRepository.save(new Item("케냐 AA", "풍부한 바디감과 강한 풍미", 15000, "/images/kenya.png"));
-            itemRepository.save(new Item("브라질 산토스", "견과류 향과 부드러운 맛", 11000, "/images/brazil.png"));
+            itemRepository.save(new Item("케냐 AA Plus 오타야 (500g)", "과일향과 꽃향기 그리고 세련된 후미와 간결한 바디가 특징이며 전체적인 발란스가 좋은 커피", 21000, "/kenya.jpg"));
+            itemRepository.save(new Item("에티오피아 예가체프 (500g)", "살구,사과,딸기 등 상쾌한 과실향이 강한 커피", 21000, "/eth.jpeg"));
+            itemRepository.save(new Item("고도의 시간 (500g)", "견과류의 풍부한 고소함이 특징이며 가볍게 즐기기 가장 좋은 커피", 16000, "/good.jpg"));
+            itemRepository.save(new Item("컬러인 클래식 (500g)", "고소한 호두와 아몬드 향과, 오렌지 살구 등 시트러스 향과 어우러져 상쾌한 신맛과 중후한 바디감의 맛으로 표현된 커피", 24000, "/classic.jpg"));
         }
     }
 }
