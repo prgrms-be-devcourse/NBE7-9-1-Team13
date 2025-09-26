@@ -29,10 +29,12 @@ public class MemberController {
     ){
 
         Member member = memberService.login(loginRequest.email(), loginRequest.password());
+        String accessToken = memberService.generateToken(member);
+
         return new RsData(
                 "200-1",
                 "로그인에 성공하셨습니다",
-                new LoginResponse(member)
+                new LoginResponse(member, accessToken)
         );
     }
 

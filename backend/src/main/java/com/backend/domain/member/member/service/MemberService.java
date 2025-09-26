@@ -4,6 +4,7 @@ import com.backend.domain.member.member.entity.Member;
 import com.backend.domain.member.member.repository.MemberRepository;
 import com.backend.domain.member.member.role.Role;
 import com.backend.global.exception.ServiceException;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MemberAuthTokenService memberAuthTokenService;
 
     public Member join(String email, String password, Role role) {
         Member member = Member.builder()
@@ -42,5 +44,13 @@ public class MemberService {
 
     public long count() {
         return memberRepository.count();
+    }
+
+    public String generateToken(Member member) {
+        return memberAuthTokenService.generateToken(member);
+    }
+
+    public Claims parseToken(String token) {
+        return memberAuthTokenService.parseToken(token);
     }
 }
