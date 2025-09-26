@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.backend.domain.orders.orders.entity.Orders;
 
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
-	List<Orders> findByMemberEmail(String email);
+	List<Orders> findByEmail(String email);
 
 }

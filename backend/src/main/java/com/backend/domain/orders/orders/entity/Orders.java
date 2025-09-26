@@ -28,6 +28,7 @@ import lombok.Setter;
 public class Orders extends BaseEntity {
 
 	private String address;
+    private String email;
 
     public enum Status {
         DELIVERED,

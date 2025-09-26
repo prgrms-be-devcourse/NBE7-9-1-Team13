@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Order } from "@/type/order";
 import { useSearchParams } from "next/navigation";
 
@@ -10,70 +10,27 @@ import { useSearchParams } from "next/navigation";
 //지금은 임시 데이터로 작업한 것!
 
 export default function OrdersPage() {
-  // 주문내역 데이터 임시 (추후 서버 연동)
-  const [orders] = useState<Order[]>([
-    {
-      id: 1,
-      email: "test@example.com",
-      status: "ORDERED",
-      address: "서울시 강남구 테헤란로 123",
-      order_date: "2025-09-24",
-      delivery_date: "2025-09-26",
-      items: [
-        { name: "케냐 AA Plus 오타야", quantity: 2, price: 21000 },
-        { name: "고도의 시간", quantity: 1, price: 11000 },
-      ],
-      total: 53000,
-    },
-    {
-      id: 2,
-      email: "hello@cafe.com",
-      status: "DELIVERED",
-      address: "서울시 서초구 반포대로 45",
-      order_date: "2025-09-23",
-      delivery_date: "2025-09-25",
-      items: [
-        { name: "에티오피아 예가체프", quantity: 1, price: 21000 },
-        { name: "고도의 시간", quantity: 3, price: 11000 },
-      ],
-      total: 54000,
-    },
-    {
-      id: 3,
-      email: "hello@cafe.com",
-      status: "ORDERED",
-      address: "서울시 서초구 반포대로 45",
-      order_date: "2025-09-23",
-      delivery_date: "2025-09-25",
-      items: [
-        { name: "에티오피아 예가체프", quantity: 1, price: 21000 },
-        { name: "고도의 시간", quantity: 3, price: 11000 },
-      ],
-      total: 54000,
-    },
-    {
-      id: 4,
-      email: "hello@cafe.com",
-      status: "ORDERED",
-      address: "서울시 서초구 반포대로 45",
-      order_date: "2025-09-23",
-      delivery_date: "2025-09-25",
-      items: [
-        { name: "에티오피아 예가체프", quantity: 1, price: 21000 },
-        { name: "고도의 시간", quantity: 3, price: 11000 },
-      ],
-      total: 54000,
-    },
-  ]);
-
+  // 변수 정의
+  const [orders, setOrders] = useState<Order[]>([]);
   const searchParams = useSearchParams();
   const initialEmail = searchParams.get("email") || "";
-
   const [email, setEmail] = useState(initialEmail);
   const [submitted, setSubmitted] = useState(!!initialEmail);
 
-  // 해당 이메일 주문 필터링
-  const userOrders = orders.filter((order) => order.email === email);
+  const [loading, setLoading] = useState(false);
+  // 이메일 제출 시 fetch 호출
+  useEffect(() => {
+    if (submitted && email) {
+      setLoading(true);
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/orders?email=${encodeURIComponent(email)}`)
+        .then(res => res.json())
+        .then(data => {
+          setOrders(data.data ?? []); // RsData 안의 data 배열 사용
+        })
+        .catch(err => console.error(err))
+        .finally(() => setLoading(false));
+    }
+  }, [submitted, email]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,6 +39,10 @@ export default function OrdersPage() {
       window.location.href = `/orders?email=${encodeURIComponent(email)}`;
     }
   };
+
+  const userOrders = [...orders].sort(
+    (a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime()
+  );
 
   return (
     <>
@@ -123,16 +84,23 @@ export default function OrdersPage() {
           ) : (
             userOrders.map((order) => (
               <div
-                key={order.id}
+                key={order.orderId}
                 className="border-b border-gray-200 pb-4 mb-4 last:mb-0 last:pb-0 last:border-0"
               >
                 {/* 주문 클릭 → 상세 페이지 이동 */}
                 <Link
-                  href={`/orders/${order.id}`}
+                  href={`/orders/${order.orderId}`}
                   className="block cursor-pointer hover:bg-gray-50 p-2 rounded"
                 >
                   <p className="text-sm text-gray-500 mb-2">
-                    주문일자: {order.order_date}
+                    주문일자: {new Date(order.orderDate).toLocaleString("ko-KR", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit"
+                    })}
                   </p>
                   <p
                     className={`text-sm font-semibold mb-2 ${
