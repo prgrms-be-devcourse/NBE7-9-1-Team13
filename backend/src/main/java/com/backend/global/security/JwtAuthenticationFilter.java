@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -42,22 +43,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-
-        //헤더가 없거나 "Bearer"로 시작하지 않으면 그냥  통과
-        if(header == null || !header.startsWith("Bearer ")){
-            filterChain.doFilter(request,response);
+        // 관리자 API만 검사
+        if (!requestURI.startsWith("/api/v1/admin")) {
+            filterChain.doFilter(request, response);
             return;
         }
 
-        //Bearer이후의 토큰 값 추출
-        String token = header.substring(7);
+        //토큰 꺼내기(헤더, 쿠키)
+        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String token = null;
+
+        if (header != null && header.startsWith("Bearer ")) {
+            token = header.substring(7);
+        }
+        else if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("accessToken".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                }
+            }
+        }
+
+        if (token == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
 
         try{
 
             //토큰 파싱 & 검증
             Claims claims = memberAuthTokenService.parseToken(token);
-            Long memberId = claims.get("id", Long.class);
+            //Long memberId = claims.get("id", Long.class);
             String email = claims.get("email", String.class);
             String role = claims.get("role", String.class);
 
@@ -72,6 +88,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
         }catch(JwtException e){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;

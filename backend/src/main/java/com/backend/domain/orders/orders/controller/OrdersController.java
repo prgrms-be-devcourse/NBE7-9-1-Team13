@@ -61,7 +61,9 @@ public class OrdersController {
             response
         );
     }
+
     @GetMapping("/{id}")
+    @Operation(summary = "주문 단건 조회")
     public RsData<OrdersDto.OrdersDetailResponse> readOrder(@PathVariable Long id) {
         Orders order = ordersService.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
@@ -87,21 +89,6 @@ public class OrdersController {
                 response
         );
     }
-/*
-    @DeleteMapping("/{id}")
-    @Operation(summary = "주문 삭제")
-    public RsData<Void> deleteOrders(
-            @PathVariable Long id
-    ) {
-        Orders orders = ordersService.findById(id).get();
-        ordersService.deleteOrders(orders);
-
-        return new RsData<Void>(
-                "200-1",
-                "%d번 주문이 삭제되었습니다.".formatted(id)
-        );
-    }
-*/
 
     @PutMapping("/{id}")
     @Operation(summary = "주문 수정")

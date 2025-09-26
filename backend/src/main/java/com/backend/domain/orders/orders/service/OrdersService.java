@@ -1,15 +1,5 @@
 package com.backend.domain.orders.orders.service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.backend.domain.item.item.entity.Item;
 import com.backend.domain.item.item.service.ItemService;
 import com.backend.domain.member.member.entity.Member;
@@ -18,8 +8,16 @@ import com.backend.domain.orderitem.orderitem.entity.OrderItem;
 import com.backend.domain.orders.orders.dto.OrdersDto;
 import com.backend.domain.orders.orders.entity.Orders;
 import com.backend.domain.orders.orders.repository.OrdersRepository;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -92,5 +90,7 @@ public class OrdersService {
     public Optional<Orders> findById(Long id) {
         return ordersRepository.findById(id);
     }
+
+    public List<Orders> findAll(){return ordersRepository.findAll();}
 
 }
