@@ -1,5 +1,6 @@
 package com.backend.domain.orders.orders.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrdersDto {
@@ -17,7 +18,11 @@ public class OrdersDto {
     public record OrdersResponse(
         Long orderId,
         String address,
-        List<OrderItemResponse> orderItems
+        String status,
+        LocalDateTime orderDate,
+        LocalDateTime deliveryDate,
+        List<OrderItemResponse> orderItems,
+        int total
     ) {}
 
     public record OrderItemResponse(

@@ -2,12 +2,12 @@
 //지금은 임시 데이터
 
 export type Order = {
-    id: number;
+    orderId: number;
     email: string;
     status: "DELIVERED" | "ORDERED" | "CANCELLED";
     address: string;
-    order_date: string;
-    delivery_date?: string;
-    items: { name: string; quantity: number; price: number }[];
+    orderDate: string;
+    deliveryDate?: string;
+    orderItems: { name: string; quantity: number; price: number }[];
     total: number;
   };

@@ -41,14 +41,7 @@ export default function Home() {
       price: 21000,
       image: "/eth.png",
     },
-    {
-      id: 5,
-      name: "에티오피아 예가체프 G1 코케 허니 내추럴",
-      description:
-        "well balanced cup, smooth, sweet nectar, wild floral notes와 berry fruit 향이 특징",
-      price: 21000,
-      image: "/eth.png",
-    },
+
   ];
 
   // 장바구니 상태
