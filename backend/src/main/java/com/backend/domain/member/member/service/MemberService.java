@@ -4,7 +4,6 @@ import com.backend.domain.member.member.entity.Member;
 import com.backend.domain.member.member.repository.MemberRepository;
 import com.backend.domain.member.member.role.Role;
 import com.backend.global.exception.ServiceException;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -46,11 +45,9 @@ public class MemberService {
         return memberRepository.count();
     }
 
+    //외부에서 토큰 발급할때는 memberService를 거쳐서 하도록 한다.
     public String generateToken(Member member) {
         return memberAuthTokenService.generateToken(member);
     }
 
-    public Claims parseToken(String token) {
-        return memberAuthTokenService.parseToken(token);
-    }
 }

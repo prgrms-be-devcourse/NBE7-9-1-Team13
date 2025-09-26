@@ -1,6 +1,6 @@
 package com.backend.global.security;
 
-import com.backend.domain.member.member.service.MemberService;
+import com.backend.domain.member.member.service.MemberAuthTokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -24,7 +24,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     //JWT 토큰 검증
-    private final MemberService memberService;
+    private final MemberAuthTokenService memberAuthTokenService;
 
     //JWT 토큰을 꺼내고, 검증하고, 인증 객체를 만들어 SecurityContext에 저장
     @Override
@@ -56,7 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try{
 
             //토큰 파싱 & 검증
-            Claims claims = memberService.parseToken(token);
+            Claims claims = memberAuthTokenService.parseToken(token);
             Long memberId = claims.get("id", Long.class);
             String email = claims.get("email", String.class);
             String role = claims.get("role", String.class);
