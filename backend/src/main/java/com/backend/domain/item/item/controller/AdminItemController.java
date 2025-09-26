@@ -1,11 +1,82 @@
 package com.backend.domain.item.item.controller;
 
+import com.backend.domain.item.item.dto.ItemCreateRequest;
+import com.backend.domain.item.item.dto.ItemResponse;
+import com.backend.domain.item.item.dto.ItemUpdateRequest;
+import com.backend.domain.item.item.entity.Item;
+import com.backend.domain.item.item.service.ItemService;
+import com.backend.global.rsData.RsData;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/v1/admin/items")
 @RequiredArgsConstructor
+@Tag(name="Item", description = "관리자 상품 컨트롤러")
 public class AdminItemController {
+
+    private final ItemService itemService;
+
+
+    @GetMapping
+    @Operation(summary = "관리자용 전체 상품 조회")
+    public RsData<List<ItemResponse>> getAllItems() {
+        List<ItemResponse> items = itemService.getAllItems();
+        return new RsData<>(
+                "200-1",
+                "상품 전체 조회 성공",
+                items
+        );
+    }
+
+    @PostMapping
+    @Operation(summary = "관리자 상품 생성")
+    public RsData<ItemResponse> createItem(
+            @RequestBody ItemCreateRequest request)
+    {
+        ItemResponse created = itemService.createItem(request);
+        return new RsData(
+                "200-1",
+                "상품 생성 성공",
+                created
+        );
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "관리자 상품 수정")
+    public RsData<ItemResponse> updateItem(
+            @PathVariable Long id,
+            @RequestBody ItemUpdateRequest request
+    ){
+        Item updated = itemService.updateItem(
+                id,
+                request.getName(),
+                request.getContent(),
+                request.getPrice()
+        );
+
+        return new RsData(
+                "200-1",
+                "%d번 상품 수정 성공".formatted(id),
+                updated
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "관리자 상품 삭제")
+    public RsData<ItemResponse> deleteItem(
+            @PathVariable Long id
+    ){
+        itemService.deleteItem(id);
+
+        return new RsData(
+                "200-1",
+                "%d번 상품 삭제 성공".formatted(id)
+        );
+    }
+
 }
