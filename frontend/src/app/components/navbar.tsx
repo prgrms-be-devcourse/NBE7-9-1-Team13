@@ -4,6 +4,7 @@ import Link from "next/link";
 
 export default function Navbar() {
     return (
+      <>
         <nav className="w-full bg-gray-300 text-gray-800 px-6 py-3 flex justify-between items-center">
           {/* 좌측 로고 */}
           <Link href="/" className="font-bold text-3xl">
@@ -29,5 +30,6 @@ export default function Navbar() {
             </li>
           </ul>
         </nav>
-      );
+      </>  
+    );
 }

@@ -4,28 +4,27 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { OrderDto } from "@/type/orderDto";
 import { useSearchParams } from "next/navigation";
+import { fetchApi } from "@/lib/client";
 
 //주문 내역 페이지(다건 조회)
 //이메일을 입력하고 들어갈 수 있다.
-//지금은 임시 데이터로 작업한 것!
 
 export default function OrdersPage() {
-  // 변수 정의
+
   const [orders, setOrders] = useState<OrderDto[]>([]);
   const searchParams = useSearchParams();
   const initialEmail = searchParams.get("email") || "";
   const [email, setEmail] = useState(initialEmail);
   const [submitted, setSubmitted] = useState(!!initialEmail);
-
   const [loading, setLoading] = useState(false);
+  
   // 이메일 제출 시 fetch 호출
   useEffect(() => {
     if (submitted && email) {
       setLoading(true);
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/orders?email=${encodeURIComponent(email)}`)
-        .then(res => res.json())
-        .then(data => {
-          setOrders(data.data ?? []); // RsData 안의 data 배열 사용
+      fetchApi(`/api/v1/orders?email=${encodeURIComponent(email)}`)
+        .then(rsData => {
+          setOrders(rsData.data ?? []); // RsData 안의 data 배열 사용
         })
         .catch(err => console.error(err))
         .finally(() => setLoading(false));
