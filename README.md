@@ -11,7 +11,11 @@ Spring Boot 기반의 **Grids & Circles**는 온라인 주문·배송 시스템�
 ---
 
 ## **💁‍♂️ 팀원 소개 / 역할**
-
+| 최지혁 | 구본황 | 김은경 | 김채현 | 김현수 |
+| --- | --- | --- | --- | --- |
+| [<img src=](https://github.com/username1)https://github.com/hodakrer.png" width="100"> | [<img src="](https://github.com/username2)https://github.com/BE9koo.png" width="100"> | [<img src="](https://github.com/username3)https://github.com/kimeunkyoungg.png" width="100"> | [<img src="](https://github.com/username4)https://github.com/Chehyeon-Kim23.png" width="100"> | [<img src="](https://github.com/username4)https://github.com/lambsteak-dev.png" width="100"> |
+| 팀장 | 팀원 | 팀원 | 팀원 | 팀원 |
+| 백엔드 주문 생성, 주문 다건 조회, 프론트 연동 | 백엔드 주문 수정, 주문 취소,  swagger, 프론트 연동 | 백엔드 관리자 인증/인가, 백엔드/프론트 초기 세팅, 프론트 연동  | 백엔드 상품 생성, 상품 조회, 프론트 연동 | 백엔드 상품 수정, 상품 삭제, 프론트 연동 |
 ---
 
 ## **⭐** 주요 기능
