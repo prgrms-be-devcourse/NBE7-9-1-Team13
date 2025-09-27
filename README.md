@@ -15,9 +15,40 @@ Spring Boot 기반의 **Grids & Circles**는 온라인 주문·배송 시스템�
 | --- | --- | --- | --- | --- |
 | <p align="center"><a href="https://github.com/hodakrer"><img src="https://github.com/hodakrer.png" width="100"></a></p> | <p align="center"><a href="https://github.com/BE9koo"><img src="https://github.com/BE9koo.png" width="100"></a></p> | <p align="center"><a href="https://github.com/kimeunkyoungg"><img src="https://github.com/kimeunkyoungg.png" width="100"></a></p> | <p align="center"><a href="https://github.com/Chehyeon-Kim23"><img src="https://github.com/Chehyeon-Kim23.png" width="100"></a></p> | <p align="center"><a href="https://github.com/lambsteak-dev"><img src="https://github.com/lambsteak-dev.png" width="100"></a></p> |
 | <p align="center"><b>팀장</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> |
-| <p align="center">주문 생성<br> 주문 다건 조회<br>프론트 연동</p> | <p align="center">주문 수정<br>주문 취소<br>swagger<br>프론트 연동</p> | <p align="center">관리자 인증/인가<br>백엔드/프론트 초기 세팅<br>프론트 연동</p> | <p align="center">상품 생성<br>상품 조회<br>프론트 연동</p> | <p align="center">상품 수정<br>상품 삭제<br>프론트 연동</p> |
+| <p align="center">주문 생성<br> 주문 다건 조회<br>프론트 연동</p> | <p align="center">주문 수정<br>주문 취소<br>Swagger<br>프론트 연동</p> | <p align="center">관리자 SpringSecurity/JWT<br>백엔드/프론트 초기 세팅<br>프론트 연동</p> | <p align="center">상품 생성<br>상품 조회<br>프론트 연동</p> | <p align="center">상품 수정<br>상품 삭제<br>프론트 연동</p> |
 
 
+---
+
+## 유저 스토리
+### 고객(사용자)
+
+- **C-1 [상품조회]**
+    
+    나는 고객으로서, **판매 중인 커피를 확인하기 위해**, 메뉴를 조회할 수 있다.
+    
+- **C-2 [주문작성]**
+    
+    나는 고객으로서, **원하는 커피를 원하는 주소로 받기 위해**, 주문서를 작성할 수 있다.
+    
+- **C-3 [주문조회]**
+    
+    나는 고객으로서, **내 주문 진행 상황을 확인하기 위해**, 이메일로 주문 내역을 조회할 수 있다.
+    
+- **C-4 [주문취소]**
+    
+    나는 고객으로서, **잘못하거나 필요 없어진 주문을 없애기 위해**, 주문을 취소할 수 있다.
+    
+
+### 관리자(Admin)
+
+- **A-1 [상품관리]**
+    
+    나는 관리자로서, **상품 메뉴를 최신화하기 위해**, 커피 메뉴를 등록·수정·삭제할 수 있다.
+    
+- **A-2 [주문관리]**
+    
+    나는 관리자로서, **주문을 원활히 처리하기 위해**, 주문 내역을 확인할 수 있다.
 
 ---
 
