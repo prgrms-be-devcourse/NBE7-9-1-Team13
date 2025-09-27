@@ -15,7 +15,8 @@ Spring Boot 기반의 **Grids & Circles**는 온라인 주문·배송 시스템�
 | --- | --- | --- | --- | --- |
 | <p align="center"><a href="https://github.com/hodakrer"><img src="https://github.com/hodakrer.png" width="100"></a></p> | <p align="center"><a href="https://github.com/BE9koo"><img src="https://github.com/BE9koo.png" width="100"></a></p> | <p align="center"><a href="https://github.com/kimeunkyoungg"><img src="https://github.com/kimeunkyoungg.png" width="100"></a></p> | <p align="center"><a href="https://github.com/Chehyeon-Kim23"><img src="https://github.com/Chehyeon-Kim23.png" width="100"></a></p> | <p align="center"><a href="https://github.com/lambsteak-dev"><img src="https://github.com/lambsteak-dev.png" width="100"></a></p> |
 | <p align="center"><b>팀장</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> |
-| <p align="center"><sub>백엔드 주문 생성, 주문 다건 조회, 프론트 연동</sub></p> | <p align="center"><sub>백엔드 주문 수정, 주문 취소, swagger, 프론트 연동</sub></p> | <p align="center"><sub>백엔드 관리자 인증/인가, 백엔드/프론트 초기 세팅, 프론트 연동</sub></p> | <p align="center"><sub>백엔드 상품 생성, 상품 조회, 프론트 연동</sub></p> | <p align="center"><sub>백엔드 상품 수정, 상품 삭제, 프론트 연동</sub></p> |
+| <p align="center">백엔드 주문 생성, 주문 다건 조회, 프론트 연동</p> | <p align="center">백엔드 주문 수정, 주문 취소, swagger, 프론트 연동</p> | <p align="center">백엔드 관리자 인증/인가, 백엔드/프론트 초기 세팅, 프론트 연동</p> | <p align="center">백엔드 상품 생성, 상품 조회, 프론트 연동</p> | <p align="center">백엔드 상품 수정, 상품 삭제, 프론트 연동</p> |
+
 
 ---
 
