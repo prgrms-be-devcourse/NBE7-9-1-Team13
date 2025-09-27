@@ -29,6 +29,7 @@ Spring Boot 기반의 **Grids & Circles**는 온라인 주문·배송 시스템�
 
 관리자는 인증을 거쳐 관리자 페이지에 접근할 수 있습니다.
 
+- Spring Security + JWT
 - 상품 등록, 조회, 수정, 삭제
 - 주문 내역 조회, 수정 , 삭제
 
