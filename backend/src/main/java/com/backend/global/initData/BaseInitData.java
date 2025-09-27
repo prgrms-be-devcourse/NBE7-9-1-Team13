@@ -1,18 +1,16 @@
 package com.backend.global.initData;
 
+import com.backend.domain.item.item.entity.Item;
+import com.backend.domain.item.item.repository.ItemRepository;
+import com.backend.domain.member.member.role.Role;
+import com.backend.domain.member.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.backend.domain.item.item.entity.Item;
-import com.backend.domain.item.item.repository.ItemRepository;
-import com.backend.domain.member.member.role.Role;
-import com.backend.domain.member.member.service.MemberService;
-
-import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -47,4 +45,6 @@ public class BaseInitData {
             itemRepository.save(new Item("컬러인 클래식 (500g)", "고소한 호두와 아몬드 향과, 오렌지 살구 등 시트러스 향과 어우러져 상쾌한 신맛과 중후한 바디감의 맛으로 표현된 커피", 24000, "/classic.jpg"));
         }
     }
+
+
 }

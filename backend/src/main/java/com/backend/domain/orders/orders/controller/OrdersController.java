@@ -46,16 +46,20 @@ public class OrdersController {
         List<OrdersDto.OrdersResponse> response = ordersList.stream()
             .map(order -> new OrdersDto.OrdersResponse(
                 order.getId(),
+                    order.getEmail(),
                 order.getAddress(),
                 order.getStatus().name(),
                 order.getCreateDate(),
                 order.getDeliveryDate(),// 여기서 orderDate에 매핑
                 order.getOrderItems().stream()
                     .map(item -> new OrdersDto.OrderItemResponse(
-                        item.getItem().getId(),
-                        item.getQuantity()
+                            item.getItem().getId(),
+                            item.getItem().getName(),
+                            item.getQuantity(),
+                            item.getItem().getPrice(),
+                            item.getItem().getPrice() * item.getQuantity()
                     ))
-                    .toList(),
+                        .toList(),
                 order.getOrderItems().stream()
                     .mapToInt(oi -> oi.getItem().getPrice() * oi.getQuantity())
                     .sum() // total 계산
@@ -74,13 +78,13 @@ public class OrdersController {
 
     @GetMapping("/{id}")
     @Operation(summary = "주문 단건 조회")
-    public RsData<OrdersDto.OrdersDetailResponse> readOrder(@PathVariable Long id) {
+    public RsData<OrdersDto.OrdersResponse> readOrder(@PathVariable Long id) {
         Orders order = ordersService.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
 
-        OrdersDto.OrdersDetailResponse response = new OrdersDto.OrdersDetailResponse(
+        OrdersDto.OrdersResponse response = new OrdersDto.OrdersResponse(
                 order.getId(),
-                order.getMember().getEmail(),
+                order.getEmail(),
                 order.getAddress(),
                 order.getStatus().name(),
                 order.getCreateDate(),
@@ -88,9 +92,15 @@ public class OrdersController {
                 order.getOrderItems().stream()
                         .map(oi -> new OrdersDto.OrderItemResponse(
                                 oi.getItem().getId(),
-                                oi.getQuantity()
+                                oi.getItem().getName(),
+                                oi.getQuantity(),
+                                oi.getItem().getPrice(),
+                                oi.getItem().getPrice() * oi.getQuantity()
                         ))
-                        .toList()
+                        .toList(),
+                order.getOrderItems().stream()
+                        .mapToInt(oi -> oi.getItem().getPrice() * oi.getQuantity())
+                        .sum()
         );
 
         return new RsData<>(

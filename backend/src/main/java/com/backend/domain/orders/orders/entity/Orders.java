@@ -1,25 +1,16 @@
 package com.backend.domain.orders.orders.entity;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.backend.domain.member.member.entity.Member;
 import com.backend.domain.orderitem.orderitem.entity.OrderItem;
 import com.backend.global.jpa.entity.BaseEntity;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -52,4 +43,5 @@ public class Orders extends BaseEntity {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
+
 }

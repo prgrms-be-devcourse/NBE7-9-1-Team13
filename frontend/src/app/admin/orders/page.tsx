@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Order } from "@/type/order"; 
+import { Order } from "@/type/orderDto"; 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

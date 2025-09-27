@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { Order } from "@/type/order";
+import { Order } from "@/type/orderDto";
 import Link from "next/link";
 
 //주문 단건 조회 페이지

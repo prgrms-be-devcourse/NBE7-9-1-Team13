@@ -29,6 +29,7 @@ public class AdminOrderController {
         List<OrdersDto.OrdersResponse> response = ordersList.stream()
                 .map(order -> new OrdersDto.OrdersResponse(
                         order.getId(),
+                        order.getEmail(),
                         order.getAddress(),
                         order.getStatus().name(),
                         order.getCreateDate(),
@@ -36,7 +37,10 @@ public class AdminOrderController {
                         order.getOrderItems().stream()
                                 .map(item -> new OrdersDto.OrderItemResponse(
                                         item.getItem().getId(),
-                                        item.getQuantity()
+                                        item.getItem().getName(),
+                                        item.getQuantity(),
+                                        item.getItem().getPrice(),
+                                        item.getItem().getPrice() * item.getQuantity()
                                 ))
                                 .toList(),
                         order.getOrderItems().stream()
@@ -53,11 +57,11 @@ public class AdminOrderController {
 
     @GetMapping("/{id}")
     @Operation(summary = "관리자 주문 단건 조회")
-    public RsData<OrdersDto.OrdersDetailResponse> readOrder(@PathVariable Long id) {
+    public RsData<OrdersDto.OrdersResponse> readOrder(@PathVariable Long id) {
         Orders order = ordersService.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
 
-        OrdersDto.OrdersDetailResponse response = new OrdersDto.OrdersDetailResponse(
+        OrdersDto.OrdersResponse response = new OrdersDto.OrdersResponse(
                 order.getId(),
                 order.getEmail(),
                 order.getAddress(),
@@ -67,9 +71,15 @@ public class AdminOrderController {
                 order.getOrderItems().stream()
                         .map(oi -> new OrdersDto.OrderItemResponse(
                                 oi.getItem().getId(),
-                                oi.getQuantity()
+                                oi.getItem().getName(),
+                                oi.getQuantity(),
+                                oi.getItem().getPrice(),
+                                oi.getItem().getPrice() * oi.getQuantity()
                         ))
-                        .toList()
+                        .toList(),
+                order.getOrderItems().stream()
+                        .mapToInt(oi -> oi.getItem().getPrice() * oi.getQuantity())
+                        .sum()
         );
 
         return new RsData<>(

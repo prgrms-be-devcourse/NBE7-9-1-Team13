@@ -7,5 +7,7 @@ export type Item = {
     content: string;
     price: number;
     imageUrl: string;
+    createdAt:string;
+    updatedAt:string;
   };
   
