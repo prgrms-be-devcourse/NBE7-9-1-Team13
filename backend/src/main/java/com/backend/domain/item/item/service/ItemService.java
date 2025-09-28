@@ -55,4 +55,11 @@ public class ItemService {
     public Optional<Item> findById(Long id){
         return itemRepository.findById(id);
     }
+
+
+    public ItemResponse getItemById(Long id) {
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("아이템을 찾을 수 없습니다. id=" + id));
+        return ItemResponse.fromEntity(item);
+    }
 }

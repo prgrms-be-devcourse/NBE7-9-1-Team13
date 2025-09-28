@@ -6,7 +6,6 @@ export default function AdminDashboardPage() {
     return (
         <>
         <div className="flex justify-center items-center min-h-screen bg-white">
-        {/* 버튼 컨테이너 */}
         <div className="flex flex-row gap-50">
             <Link href="/admin/items">
             <div className="w-60 h-60 p-6 mb-10 flex items-center justify-center bg-gray-300 text-black font-bold text-3xl rounded hover:bg-gray-400 transition">

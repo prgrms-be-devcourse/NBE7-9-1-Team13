@@ -33,6 +33,19 @@ public class AdminItemController {
         );
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "관리자용 단일 상품 조회")
+    public RsData<ItemResponse> getItemById(@PathVariable Long id) {
+        ItemResponse item = itemService.getItemById(id);
+        return new RsData<>(
+                "200-2",
+                "%d번 상품 조회 성공".formatted(id),
+                item
+        );
+    }
+
+
+
     @PostMapping
     @Operation(summary = "관리자 상품 생성")
     public RsData<ItemResponse> createItem(

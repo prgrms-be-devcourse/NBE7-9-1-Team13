@@ -6,10 +6,8 @@ import { OrderDto } from "@/type/orderDto";
 import Link from "next/link";
 import { fetchApi } from "@/lib/client";
 
-
 //주문 수정 페이지
 //주소만 수정할 수 있도록 함
-
 export default function OrderEditPage() {
   
     const [order, setOrder] = useState<OrderDto | null>(null);

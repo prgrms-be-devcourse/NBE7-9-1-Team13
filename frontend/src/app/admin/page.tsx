@@ -7,7 +7,6 @@ import { fetchApi } from "@/lib/client";
 //관리자 로그인 페이지
 export default function AdminLoginPage() {
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,16 +20,22 @@ export default function AdminLoginPage() {
     }
 
     try {
-      const data = await fetchApi("/api/v1/admin/login", {
+      const data = await fetchApi(`/api/v1/admin/login`, {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
-
-      alert(data.msg);
-      router.replace("/admin/dashboard");
+    
+      if (String(data.resultCode).startsWith("200")) {
+        alert(data.msg || "로그인 성공");
+        router.replace("/admin/dashboard");
+      } 
+      else {
+        alert(data.msg || "로그인 실패");
+      }
     } catch (err: any) {
-      alert(err.message || "로그인 실패");
+        alert(err.message || "로그인 실패");
     }
+
   };
 
   return (
