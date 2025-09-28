@@ -1,12 +1,12 @@
 package com.backend.domain.orders.orders.repository;
 
-import java.util.List;
-
+import com.backend.domain.orders.orders.entity.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.backend.domain.orders.orders.entity.Orders;
+import java.util.List;
 
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
 	List<Orders> findByEmail(String email);
+    List<Orders> findByStatus(Orders.Status status);
 
 }
