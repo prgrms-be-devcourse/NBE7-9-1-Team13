@@ -15,7 +15,7 @@ Spring Boot 기반의 **Grids & Circles**는 온라인 주문·배송 시스템�
 | --- | --- | --- | --- | --- |
 | <p align="center"><a href="https://github.com/hodakrer"><img src="https://github.com/hodakrer.png" width="100"></a></p> | <p align="center"><a href="https://github.com/BE9koo"><img src="https://github.com/BE9koo.png" width="100"></a></p> | <p align="center"><a href="https://github.com/kimeunkyoungg"><img src="https://github.com/kimeunkyoungg.png" width="100"></a></p> | <p align="center"><a href="https://github.com/Chehyeon-Kim23"><img src="https://github.com/Chehyeon-Kim23.png" width="100"></a></p> | <p align="center"><a href="https://github.com/lambsteak-dev"><img src="https://github.com/lambsteak-dev.png" width="100"></a></p> |
 | <p align="center"><b>팀장</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> | <p align="center"><b>팀원</b></p> |
-| <p align="center">주문 생성<br> 주문 다건 조회<br>프론트 연동</p> | <p align="center">주문 수정<br>주문 취소<br>Swagger<br>프론트 연동</p> | <p align="center">관리자 SpringSecurity/JWT<br>백엔드/프론트 초기 세팅<br>프론트 연동</p> | <p align="center">상품 생성<br>상품 조회<br>프론트 연동</p> | <p align="center">상품 수정<br>상품 삭제<br>프론트 연동</p> |
+| <p align="center">주문 생성<br> 주문 다건 조회<br>프론트 연동</p> | <p align="center">주문 수정<br>주문 취소<br>Swagger<br>배송 스케줄링<br>프론트 연동</p> | <p align="center">관리자 SpringSecurity/JWT<br>백엔드/프론트 초기 세팅<br>프론트 연동</p> | <p align="center">상품 생성<br>상품 조회<br>프론트 연동</p> | <p align="center">상품 수정<br>상품 삭제<br>주문 단건 조회<br>프론트 연동</p> |
 
 
 ---
