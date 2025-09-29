@@ -44,4 +44,19 @@ public class Orders extends BaseEntity {
         orderItem.setOrder(this);
     }
 
+    public void setDeliveryDate() {
+        LocalDateTime now = LocalDateTime.now();
+
+        // 오늘 오후 2시 (14:00:00)
+        LocalDateTime today2PM = now.withHour(14).withMinute(0).withSecond(0).withNano(0);
+
+        if (now.isBefore(today2PM)) {
+            // 오후 2시 이전 주문 → 오늘 2시
+            this.deliveryDate = today2PM;
+        } else {
+            // 오후 2시 이후 주문 → 내일 2시
+            this.deliveryDate = today2PM.plusDays(1);
+        }
+    }
+
 }

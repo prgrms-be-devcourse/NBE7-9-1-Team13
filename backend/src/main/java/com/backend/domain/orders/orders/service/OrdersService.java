@@ -32,6 +32,7 @@ public class OrdersService {
         Orders orders = new Orders();
         orders.setAddress(request.address());
         orders.setEmail(request.email());
+        orders.setDeliveryDate();
 
         List<OrderItem> orderItems = new ArrayList<>();
         for (OrdersDto.OrdersItemCreateReqBody newItem : request.orderItems()) {
@@ -88,4 +89,12 @@ public class OrdersService {
 
     public List<Orders> findAll(){return ordersRepository.findAll();}
 
+    @Transactional
+    public void updateOrderedToDelivered() {
+        List<Orders> ordersList = ordersRepository.findByStatus(Orders.Status.ORDERED);
+        for (Orders order : ordersList) {
+            order.setStatus(Orders.Status.DELIVERED);
+            order.setDeliveryDate(LocalDateTime.now());
+        }
+    }
 }
