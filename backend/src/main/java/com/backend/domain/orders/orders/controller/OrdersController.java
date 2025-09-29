@@ -1,18 +1,28 @@
 package com.backend.domain.orders.orders.controller;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.backend.domain.orders.orders.dto.OrdersDto;
 import com.backend.domain.orders.orders.entity.Orders;
 import com.backend.domain.orders.orders.service.OrdersService;
 import com.backend.global.rsData.RsData;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("api/v1/orders")
@@ -24,21 +34,14 @@ public class OrdersController {
 
     @PostMapping
     @Operation(summary = "주문 생성")
-    public RsData<LocalDateTime> createOrders(
-        @RequestBody OrdersDto.OrdersCreateReqBody request
-    ) {
+    public RsData<LocalDateTime> createOrders(@RequestBody OrdersDto.OrdersCreateReqBody request) {
         LocalDateTime deliveryDate = ordersService.createOrders(request);
-        return new RsData<>(
-            "200-1",
-            "주문이 생성되었습니다.",
-            deliveryDate
-        );
+        return RsData.success("주문이 생성되었습니다", deliveryDate);
     }
 
     @GetMapping
     @Operation(summary = "주문 다건 조회")
-    public RsData<List<OrdersDto.OrdersResponse>> readOrders(
-        @RequestParam String email) {
+    public RsData<List<OrdersDto.OrdersResponse>> readOrders(@RequestParam String email) {
         List<Orders> ordersList = ordersService.readOrders(email);
 
         // Orders → DTO 변환
@@ -65,14 +68,7 @@ public class OrdersController {
             ))
             .toList();
 
-        System.out.println("######READ ORDER RESPONSE RESULT######");
-        System.out.println(response);
-        System.out.println("######################################");
-
-        return new RsData<>("200-1",
-            "주문 목록 조회",
-            response
-        );
+        return RsData.success("주문 목록 조회", response);
     }
 
     @GetMapping("/{id}")
@@ -102,11 +98,7 @@ public class OrdersController {
                         .sum()
         );
 
-        return new RsData<>(
-                "200-1",
-                "%d번 주문 단건 조회".formatted(id),
-                response
-        );
+        return RsData.success("%d번 주문 단건 조회".formatted(id), response);
     }
 
     @PutMapping("/{id}")
@@ -120,10 +112,7 @@ public class OrdersController {
                 .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
         ordersService.modifyOrders(orders, request.address());
 
-        return new RsData(
-                "200-1",
-                "%d번 주문이 수정되었습니다.".formatted(id)
-        );
+        return RsData.success("%d번 주문이 수정되었습니다.".formatted(id));
     }
 
     @PatchMapping("/{id}")
@@ -136,10 +125,7 @@ public class OrdersController {
                 .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
         orders.setStatus(Orders.Status.CANCELLED);
 
-        return new RsData(
-                "200-1",
-                "%d번 주문이 취소되었습니다.".formatted(id)
-        );
+        return RsData.success("%d번 주문이 취소되었습니다.".formatted(id));
     }
 
 }

@@ -1,6 +1,5 @@
 package com.backend.global.rsData;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,17 +11,16 @@ public class RsData<T> {
     private String msg;
     private T data;
 
-
     public RsData(String resultCode, String msg) {
-        this.resultCode = resultCode;
-        this.msg = msg;
-        this.data = null;
+        this(resultCode, msg, null);
     }
 
-    @JsonIgnore
-    public int getStatusCode(){
-        String statusCode = resultCode.split("-")[0];
-        return Integer.parseInt(statusCode);
+    public static <T> RsData<T> success(String msg, T data) {
+        return new RsData<>("200-1", msg, data);
+    }
+
+    public static RsData<Void> success(String msg) {
+        return new RsData<>("200-1", msg, null);
     }
 
 }
