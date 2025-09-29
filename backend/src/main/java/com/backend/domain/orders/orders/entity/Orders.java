@@ -1,6 +1,5 @@
 package com.backend.domain.orders.orders.entity;
 
-import com.backend.domain.member.member.entity.Member;
 import com.backend.domain.orderitem.orderitem.entity.OrderItem;
 import com.backend.global.jpa.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -31,10 +30,6 @@ public class Orders extends BaseEntity {
     private Status status = Status.ORDERED;
 
     private LocalDateTime deliveryDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = true)
-    private Member member;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();

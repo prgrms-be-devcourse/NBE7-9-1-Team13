@@ -1,7 +1,6 @@
 package com.backend.domain.orders.orders.controller;
 
 import com.backend.domain.orders.orders.dto.OrdersDto;
-import com.backend.domain.orders.orders.dto.OrdersModifyReqDto;
 import com.backend.domain.orders.orders.entity.Orders;
 import com.backend.domain.orders.orders.service.OrdersService;
 import com.backend.global.rsData.RsData;
@@ -115,9 +114,10 @@ public class OrdersController {
     @Transactional
     public RsData<Void> modifyOrders(
             @PathVariable Long id,
-            @RequestBody OrdersModifyReqDto request
+            @RequestBody OrdersDto.OrdersModifyReqBody request
             ) {
-        Orders orders = ordersService.findById(id).get();
+        Orders orders = ordersService.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
         ordersService.modifyOrders(orders, request.address());
 
         return new RsData(
@@ -132,7 +132,8 @@ public class OrdersController {
     public RsData<Void> cancelOrders(
             @PathVariable Long id
     ) {
-        Orders orders = ordersService.findById(id).get();
+        Orders orders = ordersService.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("주문을 찾을 수 없습니다. id=" + id));
         orders.setStatus(Orders.Status.CANCELLED);
 
         return new RsData(

@@ -34,4 +34,8 @@ public class OrdersDto {
             int itemTotalPrice
     ) {}
 
+    public record OrdersModifyReqBody (
+            String address
+    ){}
+
 }
