@@ -3,7 +3,6 @@ package com.backend.domain.item.item.controller;
 import com.backend.domain.item.item.dto.ItemCreateRequest;
 import com.backend.domain.item.item.dto.ItemResponse;
 import com.backend.domain.item.item.dto.ItemUpdateRequest;
-import com.backend.domain.item.item.entity.Item;
 import com.backend.domain.item.item.service.ItemService;
 import com.backend.global.rsData.RsData;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +19,6 @@ import java.util.List;
 public class AdminItemController {
 
     private final ItemService itemService;
-
 
     @GetMapping
     @Operation(summary = "관리자용 전체 상품 조회")
@@ -61,11 +59,11 @@ public class AdminItemController {
 
     @PutMapping("/{id}")
     @Operation(summary = "관리자 상품 수정")
-    public RsData<ItemResponse> updateItem(
+    public RsData<Void> updateItem(
             @PathVariable Long id,
             @RequestBody ItemUpdateRequest request
     ){
-        Item updated = itemService.updateItem(
+        itemService.updateItem(
                 id,
                 request.getName(),
                 request.getContent(),
@@ -74,8 +72,7 @@ public class AdminItemController {
 
         return new RsData(
                 "200-1",
-                "%d번 상품 수정 성공".formatted(id),
-                updated
+                "%d번 상품 수정 성공".formatted(id)
         );
     }
 

@@ -102,7 +102,6 @@ public class OrdersController {
                         .mapToInt(oi -> oi.getItem().getPrice() * oi.getQuantity())
                         .sum()
         );
-
         return new RsData<>(
                 "200-1",
                 "%d번 주문 단건 조회".formatted(id),
