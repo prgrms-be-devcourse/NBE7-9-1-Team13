@@ -7,8 +7,6 @@ import { useSearchParams } from "next/navigation";
 import { fetchApi } from "@/lib/client";
 
 //주문 내역 페이지(다건 조회)
-//이메일을 입력하고 들어갈 수 있다.
-
 export default function OrdersPage() {
 
   const [orders, setOrders] = useState<OrderDto[]>([]);
@@ -17,14 +15,14 @@ export default function OrdersPage() {
   const [email, setEmail] = useState(initialEmail);
   const [submitted, setSubmitted] = useState(!!initialEmail);
   const [loading, setLoading] = useState(false);
-  
-  // 이메일 제출 시 fetch 호출
+
+  // 이메일 제출
   useEffect(() => {
     if (submitted && email) {
       setLoading(true);
       fetchApi(`/api/v1/orders?email=${encodeURIComponent(email)}`)
         .then(rsData => {
-          setOrders(rsData.data ?? []); // RsData 안의 data 배열 사용
+          setOrders(rsData.data ?? []);
         })
         .catch(err => console.error(err))
         .finally(() => setLoading(false));
@@ -34,7 +32,6 @@ export default function OrdersPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      // 이메일 입력 후 주문 페이지 리로드 시 쿼리스트링에 email 포함
       window.location.href = `/orders?email=${encodeURIComponent(email)}`;
     }
   };
@@ -48,7 +45,6 @@ export default function OrdersPage() {
       <h1 className="text-2xl font-bold p-10 text-center">주문 내역 확인</h1>
 
       {!submitted ? (
-        // 이메일 입력창
         <form
           onSubmit={handleSubmit}
           className="max-w-md mx-auto bg-white p-6 rounded shadow flex flex-col gap-8"
@@ -72,7 +68,6 @@ export default function OrdersPage() {
           </button>
         </form>
       ) : (
-        // 주문 내역 표시
         <div className="max-w-2xl mx-auto bg-white p-6 rounded shadow">
           <h2 className="font-bold text-lg mb-4 text-center">내 주문 내역</h2>
 
@@ -86,7 +81,6 @@ export default function OrdersPage() {
                 key={order.orderId}
                 className="border-b border-gray-200 pb-4 mb-4 last:mb-0 last:pb-0 last:border-0"
               >
-                {/* 주문 클릭 → 상세 페이지 이동 */}
                 <Link
                   href={`/orders/${order.orderId}`}
                   className="block cursor-pointer hover:bg-gray-50 p-2 rounded"
@@ -102,13 +96,12 @@ export default function OrdersPage() {
                     })}
                   </p>
                   <p
-                    className={`text-sm font-semibold mb-2 ${
-                      order.status === "DELIVERED"
+                    className={`text-sm font-semibold mb-2 ${order.status === "DELIVERED"
                         ? "text-green-600"
                         : order.status === "CANCELLED"
-                        ? "text-red-600"
-                        : "text-yellow-600"
-                    }`}
+                          ? "text-red-600"
+                          : "text-yellow-600"
+                      }`}
                   >
                     상태: {order.status}
                   </p>

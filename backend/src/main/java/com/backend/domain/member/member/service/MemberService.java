@@ -45,7 +45,6 @@ public class MemberService {
         return memberRepository.count();
     }
 
-    //외부에서 토큰 발급할때는 memberService를 거쳐서 하도록 한다.
     public String generateToken(Member member) {
         return memberAuthTokenService.generateToken(member);
     }

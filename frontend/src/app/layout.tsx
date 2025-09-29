@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Pretendard 등록
+
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
   variable: "--font-pretendard",
-  weight: "100 900", // Variable Font 범위
+  weight: "100 900",
   display: "swap",
 });
 

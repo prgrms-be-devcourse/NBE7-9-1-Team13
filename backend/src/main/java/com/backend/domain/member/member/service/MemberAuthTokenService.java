@@ -20,8 +20,6 @@ public class MemberAuthTokenService {
     @Value("${custom.jwt.expire-seconds}")
     private long expireSeconds;
 
-
-    //토큰 생성
     public String generateToken(Member member) {
         return JwtUtil.createToken(
                 secretPattern,

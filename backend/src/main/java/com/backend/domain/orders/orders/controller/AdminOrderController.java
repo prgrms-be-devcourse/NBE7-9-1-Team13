@@ -25,7 +25,6 @@ public class AdminOrderController {
     public RsData<List<OrdersDto.OrdersResponse>> readOrders() {
         List<Orders> ordersList = ordersService.findAll();
 
-        // Orders → DTO 변환
         List<OrdersDto.OrdersResponse> response = ordersList.stream()
                 .map(order -> new OrdersDto.OrdersResponse(
                         order.getId(),
@@ -33,7 +32,7 @@ public class AdminOrderController {
                         order.getAddress(),
                         order.getStatus().name(),
                         order.getCreateDate(),
-                        order.getDeliveryDate(),// 여기서 orderDate에 매핑
+                        order.getDeliveryDate(),
                         order.getOrderItems().stream()
                                 .map(item -> new OrdersDto.OrderItemResponse(
                                         item.getItem().getId(),
@@ -45,7 +44,7 @@ public class AdminOrderController {
                                 .toList(),
                         order.getOrderItems().stream()
                                 .mapToInt(oi -> oi.getItem().getPrice() * oi.getQuantity())
-                                .sum() // total 계산
+                                .sum()
                 ))
                 .toList();
 

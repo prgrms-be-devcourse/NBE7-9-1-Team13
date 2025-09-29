@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-@ControllerAdvice //컨트롤러 실행을 지켜보다가 해당 에러 생기면 실행하도록 함
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)

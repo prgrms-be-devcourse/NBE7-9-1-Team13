@@ -17,7 +17,6 @@ import java.util.Optional;
 public class ItemService {
     private final ItemRepository itemRepository;
 
-    // 상품 생성 (Create)
     public ItemResponse createItem(ItemCreateRequest request) {
         Item item = new Item(
                 request.getName(),
@@ -55,7 +54,6 @@ public class ItemService {
     public Optional<Item> findById(Long id){
         return itemRepository.findById(id);
     }
-
 
     public ItemResponse getItemById(Long id) {
         Item item = itemRepository.findById(id)
