@@ -31,22 +31,17 @@ public class MemberController {
             HttpServletResponse response
     ){
 
-        //이메일 + 비밀번호로 검증
         Member member = memberService.login(loginRequest.email(), loginRequest.password());
 
-        //토큰 발급
         String accessToken = memberService.generateToken(member);
 
-        //응답 쿠키에 토큰 추가
         Cookie cookie = new Cookie("accessToken", accessToken);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setDomain("localhost");
         response.addCookie(cookie);
 
-        //응답 헤더에 토큰 추가
         response.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
-
 
         return new RsData(
                 "200-1",
@@ -58,13 +53,14 @@ public class MemberController {
     @DeleteMapping("/logout")
     @Operation(summary = "관리자 로그아웃")
     public RsData<Void> logout(HttpServletResponse response) {
+
         Cookie cookie = new Cookie("accessToken", "");
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setDomain("localhost");
         cookie.setMaxAge(0); // 즉시 만료
 
-        response.addCookie(cookie); //수정 예정. delete메서드를 따로 만드는게 가독성이 좋을 것 같다.
+        response.addCookie(cookie);
 
         return new RsData<>(
                 "200-1",

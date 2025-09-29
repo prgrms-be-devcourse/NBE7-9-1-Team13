@@ -4,8 +4,3 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
-
-## 개발용 DB(H2 파일 기반) 연결 설정
-## 로컬에서 개발자가 앱을 여러 번 실행해도 데이터가 유지됨
-## H2 문법을 MySQL 호환 모드로 실행

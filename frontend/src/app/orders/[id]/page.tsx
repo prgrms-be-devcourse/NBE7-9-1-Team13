@@ -11,7 +11,6 @@ export default function OrderDetailPage() {
   const { id: orderId } = useParams();
   const router = useRouter();
 
-  // 주문 단건 조회
   useEffect(() => {
     fetchApi(`/api/v1/orders/${orderId}`)
       .then((res) => setOrder(res.data))
@@ -71,10 +70,10 @@ export default function OrderDetailPage() {
           </p>
           <p
             className={`mt-2 font-semibold ${order.status === "DELIVERED"
-                ? "text-green-600"
-                : order.status === "CANCELLED"
-                  ? "text-red-600"
-                  : "text-yellow-600"
+              ? "text-green-600"
+              : order.status === "CANCELLED"
+                ? "text-red-600"
+                : "text-yellow-600"
               }`}
           >
             상태: {order.status}
@@ -93,7 +92,7 @@ export default function OrderDetailPage() {
           <p className="mt-4 font-bold text-right">
             총 금액: {order.orderTotalPrice.toLocaleString()}원
           </p>
-          {/* 버튼 */}
+
           <div className="mt-6 flex justify-between">
             <a
               href={`/orders?email=${order.email}`}

@@ -10,7 +10,6 @@ export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // 로그인 처리
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -24,16 +23,16 @@ export default function AdminLoginPage() {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
-    
+
       if (String(data.resultCode).startsWith("200")) {
         alert(data.msg || "로그인 성공");
         router.replace("/admin/dashboard");
-      } 
+      }
       else {
         alert(data.msg || "로그인 실패");
       }
     } catch (err: any) {
-        alert(err.message || "로그인 실패");
+      alert(err.message || "로그인 실패");
     }
 
   };

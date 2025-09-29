@@ -20,14 +20,15 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+//JWT 토큰을 꺼내고, 검증하고, 인증 객체를 만들어 SecurityContext에 저장
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    //JWT 토큰 검증
+
     private final MemberAuthTokenService memberAuthTokenService;
 
-    //JWT 토큰을 꺼내고, 검증하고, 인증 객체를 만들어 SecurityContext에 저장
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -37,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String requestURI = request.getRequestURI();
 
-        //관리자 로그인은 토큰 검사하지 않는다
+        //관리자 로그인은 토근 검사 X
         if(requestURI.equals("/api/v1/admin/login")){
             filterChain.doFilter(request,response);
             return;
@@ -49,7 +50,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        //토큰 꺼내기(헤더, 쿠키)
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         String token = null;
 
@@ -71,19 +71,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try{
 
-            //토큰 파싱 & 검증
             Claims claims = memberAuthTokenService.parseToken(token);
             //Long memberId = claims.get("id", Long.class);
             String email = claims.get("email", String.class);
             String role = claims.get("role", String.class);
 
-            //인증 객체 생성
             UserDetails user = User.withUsername(email)
-                    .password("") //이미 검증되었기때문에 필요없다
+                    .password("")
                     .roles(role)
                     .build();
 
-            //authentication 객체 생성 후 SecurityContext에 저장
             Authentication authentication =
                     new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 

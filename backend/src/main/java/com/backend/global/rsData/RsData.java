@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-//보고서 양식은 항상 일관되게 유지
 @AllArgsConstructor
 @Getter
 public class RsData<T> {

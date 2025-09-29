@@ -21,7 +21,6 @@ public class AdminItemController {
 
     private final ItemService itemService;
 
-
     @GetMapping
     @Operation(summary = "관리자용 전체 상품 조회")
     public RsData<List<ItemResponse>> getAllItems() {
@@ -43,8 +42,6 @@ public class AdminItemController {
                 item
         );
     }
-
-
 
     @PostMapping
     @Operation(summary = "관리자 상품 생성")

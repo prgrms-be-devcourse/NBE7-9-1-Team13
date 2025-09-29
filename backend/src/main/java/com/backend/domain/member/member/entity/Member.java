@@ -19,11 +19,9 @@ public class Member extends BaseEntity{
     @Column(unique = true)
     private String email;
 
-    private String password; //고객은 null
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(unique = true)
-    private String apiKey; //인증데이터를 위한 apiKey 도입
 }

@@ -1,33 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { OrderDto } from "@/type/orderDto"; 
+import { OrderDto } from "@/type/orderDto";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { fetchApi } from "@/lib/client";
 
-//관리자 주문 내역 관리 페이지
-//모든 주문이 다 보이도록 함
-
+//관리자 주문 관리 페이지
 export default function AdminOrdersPage() {
-    const router = useRouter();
-    const [orders, setOrders] = useState<OrderDto[]>([]);
-    
-    useEffect(() => {
-      const fetchOrders = async () => {
-        try {
-          const res = await fetchApi("/api/v1/admin/orders");
-          setOrders(res.data ?? []);
-        } catch (err) {
-          console.error("주문 조회 에러:", err);
-        }
-      };
-      fetchOrders();
-    }, []);
+  const router = useRouter();
+  const [orders, setOrders] = useState<OrderDto[]>([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await fetchApi("/api/v1/admin/orders");
+        setOrders(res.data ?? []);
+      } catch (err) {
+        console.error("주문 조회 에러:", err);
+      }
+    };
+    fetchOrders();
+  }, []);
 
 
-    return (
-      <>
+  return (
+    <>
       <div className="p-10">
         <h1 className="text-2xl font-bold mb-10 text-center">관리자 주문 내역 관리</h1>
         <div className="overflow-x-auto">
@@ -54,33 +52,32 @@ export default function AdminOrdersPage() {
                   <td className="px-4 py-2 border">{order.orderId}</td>
                   <td className="px-4 py-2 border">{order.email}</td>
                   <td
-                    className={`px-4 py-2 border font-semibold ${
-                      order.status === "DELIVERED"
-                        ? "text-green-600"
-                        : order.status === "CANCELLED"
+                    className={`px-4 py-2 border font-semibold ${order.status === "DELIVERED"
+                      ? "text-green-600"
+                      : order.status === "CANCELLED"
                         ? "text-red-600"
                         : "text-yellow-600"
-                    }`}
+                      }`}
                   >
                     {order.status}
                   </td>
                   <td className="px-4 py-2 border">{order.address}</td>
                   <td className="px-4 py-2 border">{new Date(order.orderDate).toLocaleString("ko-KR", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit"
-                    })}</td>
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                  })}</td>
                   <td className="px-4 py-2 border">{new Date(order.deliveryDate).toLocaleString("ko-KR", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          })}</td>
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                  })}</td>
                   <td className="px-4 py-2 border text-left">
                     <ul className="list-disc list-inside text-sm">
                       {order.orderItems.map((item, idx) => (
@@ -99,6 +96,6 @@ export default function AdminOrdersPage() {
           </table>
         </div>
       </div>
-      </>
-    );
-  }
+    </>
+  );
+}
