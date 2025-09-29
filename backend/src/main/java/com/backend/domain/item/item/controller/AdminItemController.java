@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/admin/items")
 @RequiredArgsConstructor
-@Tag(name="Item", description = "관리자 상품 컨트롤러")
+@Tag(name="AdminItem", description = "관리자 상품 컨트롤러")
 public class AdminItemController {
 
     private final ItemService itemService;

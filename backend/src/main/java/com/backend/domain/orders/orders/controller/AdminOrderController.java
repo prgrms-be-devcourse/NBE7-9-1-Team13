@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("api/v1/admin/orders")
 @RequiredArgsConstructor
-@Tag(name="Orders", description = "관리자 주문 컨트롤러")
+@Tag(name="AdminOrders", description = "관리자 주문 컨트롤러")
 public class AdminOrderController {
 
     private final OrdersService ordersService;
