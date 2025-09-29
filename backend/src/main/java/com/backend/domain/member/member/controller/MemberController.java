@@ -1,11 +1,5 @@
 package com.backend.domain.member.member.controller;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.domain.member.member.dto.LoginRequest;
 import com.backend.domain.member.member.dto.LoginResponse;
@@ -13,13 +7,14 @@ import com.backend.domain.member.member.dto.MemberDto;
 import com.backend.domain.member.member.entity.Member;
 import com.backend.domain.member.member.service.MemberService;
 import com.backend.global.rsData.RsData;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -67,7 +62,10 @@ public class MemberController {
 
         response.addCookie(cookie);
 
-        return RsData.success("로그아웃 되었습니다.");
+        return new RsData<>(
+                "200-1",
+                "로그아웃 되었습니다."
+        );
     }
 
 }
