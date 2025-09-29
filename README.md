@@ -109,6 +109,9 @@ Spring Boot 기반의 **Grids & Circles**는 온라인 주문·배송 시스템�
 
 ## 🎞️ 시연 영상
 
+[고객 시연 영상](https://github.com/user-attachments/assets/a5406a26-4580-4944-a9f1-610f840659f3) /
+[관리자 시연 영상](https://github.com/user-attachments/assets/816e0d73-0856-478f-9c50-6318912f14ea)
+
 ---
 ## 📃 코딩 컨벤션
 
