@@ -38,10 +38,27 @@ export default function AdminOrderDetailPage() {
         <p className="text-lg text-gray-600 mb-2">주문번호: {order.orderId}</p>
         <p className="text-lg text-gray-600 mb-2">이메일: {order.email}</p>
         <p className="text-lg text-gray-600 mb-2">주소: {order.address}</p>
-        <p className="text-lg text-gray-600 mb-2">주문일자: {order.orderDate}</p>
+        <p className="text-lg text-gray-600 mb-2">주문일자: {new Date(order.orderDate).toLocaleString("ko-KR", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit"
+                    })}</p>
         <p className="text-lg text-gray-600 mb-3">
-          배송일자: {order.deliveryDate || "미정"}
-        </p>
+            배송일자: {order.status === "DELIVERED" || order.status === "CANCELLED"
+              ? ""
+              : new Date(order.deliveryDate).toLocaleString("ko-KR", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true, // 오전/오후 표시
+              })}
+          </p>
         <p
           className={`mt-2 font-semibold ${
             order.status === "DELIVERED"

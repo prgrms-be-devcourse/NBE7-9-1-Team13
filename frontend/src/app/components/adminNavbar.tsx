@@ -23,7 +23,7 @@ export default function AdminNavbar() {
         <>
         <nav className="w-full bg-gray-300 text-gray-800 px-6 py-3 flex justify-between items-center">
           {/* 좌측 로고 */}
-          <Link href="/" className="font-bold text-3xl">
+          <Link href="/admin/dashboard" className="font-bold text-3xl">
             관리자 페이지
           </Link>
     

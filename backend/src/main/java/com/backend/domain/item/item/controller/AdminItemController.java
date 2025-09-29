@@ -81,7 +81,7 @@ public class AdminItemController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "관리자 상품 삭제")
-    public RsData<ItemResponse> deleteItem(
+    public RsData<Void> deleteItem(
             @PathVariable Long id
     ){
         itemService.deleteItem(id);

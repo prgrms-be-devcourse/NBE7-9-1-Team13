@@ -65,8 +65,22 @@ export default function AdminOrdersPage() {
                     {order.status}
                   </td>
                   <td className="px-4 py-2 border">{order.address}</td>
-                  <td className="px-4 py-2 border">{order.orderDate}</td>
-                  <td className="px-4 py-2 border">{order.deliveryDate || "미정"}</td>
+                  <td className="px-4 py-2 border">{new Date(order.orderDate).toLocaleString("ko-KR", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit"
+                    })}</td>
+                  <td className="px-4 py-2 border">{new Date(order.deliveryDate).toLocaleString("ko-KR", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+          })}</td>
                   <td className="px-4 py-2 border text-left">
                     <ul className="list-disc list-inside text-sm">
                       {order.orderItems.map((item, idx) => (
